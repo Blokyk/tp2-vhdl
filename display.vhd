@@ -3,6 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity display is
     port ( clk      : in std_logic;
+           running  : in std_logic;
+           rst_btn  : in std_logic;
            seg      : out std_logic_vector(6 downto 0);
            dp       : out std_logic;
            an       : out std_logic_vector(3 downto 0));
@@ -49,8 +51,8 @@ begin
   chrono : entity work.chrono(behavioral)
         port map(
             clk => clk,
-            rst => '0',
-            start => '1',
+            rst => rst_btn,
+            start => running,
             seconds => seconds,
             minutes => minutes
         );
